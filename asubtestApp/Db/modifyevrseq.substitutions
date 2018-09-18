@@ -1,0 +1,12 @@
+file evrcalcdelay.template
+{
+pattern {SYS, DEV}
+	{$(SYS1), $(DEV1)}
+	{$(SYS2), $(DEV2)}
+}
+
+file asubseq.template
+{
+pattern {SYS, EVR}
+	{$(SYS), $(EVR)}
+}

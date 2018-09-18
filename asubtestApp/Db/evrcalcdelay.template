@@ -1,0 +1,24 @@
+record(ai, "$(SYS)$(DEV)freq_sp") {
+#	field(VAL,  "14")
+	field(EGU,  "Hz")
+}
+
+record(ai, "$(SYS)$(DEV)tube_pos_delay") 
+#	field(VAL,  "0.0")
+	field(EGU,  "us")
+}
+
+record(ai, "$(SYS)$(DEV)mech_offset_delay") {
+#	field(VAL,  "0.0")
+	field(EGU,  "deg")
+}
+
+record(calc, "$(SYS)$(DEV)total_delay") {
+	field(SCAN, "Passive")
+#	field(VAL,  "0.0")
+	field(EGU,  "us")
+	field(INPA, "$(SYS)$(DEV)freq_sp")
+	field(INPB, "$(SYS)$(DEV)mech_offset_delay")
+	field(INPC, "$(SYS)$(DEV)tube_pos_dela")
+	field(CALC, "B/360.0*1/A+C")
+}

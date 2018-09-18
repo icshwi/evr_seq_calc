@@ -1,0 +1,19 @@
+record(asub, "$(SYS)$(EVR)SoftSeq-Calc") {
+	field(SCAN, "passive")
+	field(SNAM, "evr_sequence_modifier")
+	field(INPA, "$(SYS)$(DEV1)in_freq")
+	field(INPB, "$(SYS)$(DEV2)in_freq")
+	field(INPC, "$(SYS)$(DEV3)in_freq")
+	field(INPD, "$(SYS)$(DEV4)in_freq")
+	
+	field(INPE, "$(SYS)$(DEV1)in_delay")
+	field(INPF, "$(SYS)$(DEV2)in_delay")
+	field(INPG, "$(SYS)$(DEV3)in_delay")
+	field(INPH, "$(SYS)$(DEV4)in_delay")
+
+	field(INPI, "$(SYS)base-event-number")
+	
+	field(OUTA, "$(SYS)$(EVR)SoftSeq0-EvtCode-SP")
+	field(OUTB, "$(SYS)$(EVR)SoftSeq0-Timestamp-SP")
+	field(NOA,  "2000")
+}
