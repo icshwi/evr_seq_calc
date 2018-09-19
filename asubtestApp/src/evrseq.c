@@ -3,6 +3,7 @@
 #include <epicsExport.h>
 #include <string.h> // Provides memcpy prototype
 #include <stdlib.h> // Provides calloc prototyp
+#include <stdio.h>
 //#include <create_tick_event_list.h>
 
 int  create_tick_event_list(int freqs[], int arr_len, int sys_freq, int total_ticks, int base_event_no, int *tick_list, int *event_list) {
@@ -60,6 +61,7 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	int i, total_ticks, base_ticks, arr_len, base_event_no, total_events;
 	float low_freq;
 
+	printf("Start\n");
 	in_freqs[0] = *(int *)precord->a;
 	in_freqs[1] = *(int *)precord->b;
 	in_freqs[2] = *(int *)precord->c;
@@ -79,11 +81,10 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 		if ( low_freq > in_freqs[i]) {
 			low_freq = 14.0/12.0;
 			total_ticks = base_ticks * 12;
-		
 		}
 	}
-
-	arr_len = sizeof(in_freqs) / sizeof(in_freqs[0]);
+	printf("Input freqs: %d, %d\n", sizeof(in_freqs[0]), sizeof(in_freqs));
+	/*arr_len = sizeof(in_freqs) / sizeof(in_freqs[0]);
 	total_events = create_tick_event_list(in_freqs, arr_len, low_freq, total_ticks, base_event_no, std_tick_list, std_event_list);
 
 	int tick_list[total_events], event_list[total_events];
@@ -97,11 +98,9 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	arr_len = sizeof(tick_list) / sizeof(tick_list[0]);
 //	resolve_conflicts(arr_len, tick_list, event_list);
 	
-
+*/
 return 0;
 }
-
-
 
 epicsRegisterFunction(evr_sequence_modifier);
 

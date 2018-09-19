@@ -1,19 +1,24 @@
-record(asub, "$(SYS)$(EVR)SoftSeq-Calc") {
-	field(SCAN, "passive")
+record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
+	field(SCAN, "Passive")
 	field(SNAM, "evr_sequence_modifier")
-	field(INPA, "$(SYS)$(DEV1)in_freq")
-	field(INPB, "$(SYS)$(DEV2)in_freq")
-	field(INPC, "$(SYS)$(DEV3)in_freq")
-	field(INPD, "$(SYS)$(DEV4)in_freq")
+	field(INPA, "$(SYS)$(DEV1)freq_sp")
+	field(INPB, "$(SYS)$(DEV2)freq_sp")
+	field(INPC, "$(SYS)$(DEV3)freq_sp")
+	field(INPD, "$(SYS)$(DEV4)freq_sp")
 	
-	field(INPE, "$(SYS)$(DEV1)in_delay")
-	field(INPF, "$(SYS)$(DEV2)in_delay")
-	field(INPG, "$(SYS)$(DEV3)in_delay")
-	field(INPH, "$(SYS)$(DEV4)in_delay")
+	field(INPE, "$(SYS)$(DEV1)total_delay_ns CPP")
+	field(INPF, "$(SYS)$(DEV2)total_delay_ns CPP")
+	field(INPG, "$(SYS)$(DEV3)total_delay_ns CPP")
+	field(INPH, "$(SYS)$(DEV4)total_delay_ns CPP")
 
-	field(INPI, "$(SYS)base-event-number")
+	field(INPI, "$(SYS)$(EVR)base-event-number CPP")
 	
 	field(OUTA, "$(SYS)$(EVR)SoftSeq0-EvtCode-SP")
 	field(OUTB, "$(SYS)$(EVR)SoftSeq0-Timestamp-SP")
-	field(NOA,  "2000")
+	field(OUTB, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd")
+	field(NOVA, "1000")
+	field(FLNK, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd.PROC")
+}
+record(ai, "$(SYS)$(EVR)base-event-number") {
+	field(VAL, "17")
 }

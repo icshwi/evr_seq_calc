@@ -1,8 +1,10 @@
 file evrcalcdelay.template
 {
 pattern {SYS, DEV}
-	{$(SYS1), $(DEV1)}
-	{$(SYS2), $(DEV2)}
+	{$(SYS), $(DEV1)}
+	{$(SYS), $(DEV2)}
+	{$(SYS), $(DEV3)}
+	{$(SYS), $(DEV4)}
 }
 
 file asubseq.template

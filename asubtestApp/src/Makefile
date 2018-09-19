@@ -14,9 +14,8 @@ DBD += asubtest.dbd
 
 # asubtest.dbd will be made up from these files:
 asubtest_DBD += base.dbd
-
 # Include dbd files from all support applications:
-#asubtest_DBD += xxx.dbd
+asubtest_DBD += evrseq.dbd
 
 # Add all the support libraries needed by this IOC
 #asubtest_LIBS += xxx
