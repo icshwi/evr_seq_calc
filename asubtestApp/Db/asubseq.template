@@ -5,20 +5,28 @@ record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
 	field(INPB, "$(SYS)$(DEV2)freq_sp")
 	field(INPC, "$(SYS)$(DEV3)freq_sp")
 	field(INPD, "$(SYS)$(DEV4)freq_sp")
-	
-	field(INPE, "$(SYS)$(DEV1)total_delay_ns CPP")
-	field(INPF, "$(SYS)$(DEV2)total_delay_ns CPP")
-	field(INPG, "$(SYS)$(DEV3)total_delay_ns CPP")
-	field(INPH, "$(SYS)$(DEV4)total_delay_ns CPP")
-
-	field(INPI, "$(SYS)$(EVR)base-event-number CPP")
-	
+	field(INPE, "$(SYS)$(DEV1)total_delay_ns")
+	field(INPF, "$(SYS)$(DEV2)total_delay_ns")
+	field(INPG, "$(SYS)$(DEV3)total_delay_ns")
+	field(INPH, "$(SYS)$(DEV4)total_delay_ns")
+	field(INPI, "$(SYS)$(EVR)base-event-number")
 	field(OUTA, "$(SYS)$(EVR)SoftSeq0-EvtCode-SP")
 	field(OUTB, "$(SYS)$(EVR)SoftSeq0-Timestamp-SP")
-	field(OUTB, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd")
+	field(OUTC, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd")
 	field(NOVA, "1000")
+	field(NOVB, "1000")
+	field(FTA,  "FLOAT")
+	field(FTB,  "FLOAT")
+	field(FTC,  "FLOAT")
+	field(FTD,  "FLOAT")
+	field(FTE,  "FLOAT")
+	field(FTF,  "FLOAT")
+	field(FTG,  "FLOAT")
+	field(FTH,  "FLOAT")
+	field(FTI,  "FLOAT")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd.PROC")
 }
 record(ai, "$(SYS)$(EVR)base-event-number") {
 	field(VAL, "17")
+	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
