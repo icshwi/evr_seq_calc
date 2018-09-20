@@ -1,28 +1,28 @@
-record(ai, "$(SYS)$(DEV)freq_sp") {
+record(ai, "$(SYS)$(DEV)Freq-SP") {
 	field(VAL,  "0")
 	field(EGU,  "Hz")
-	field(FLNK, "$(SYS)$(DEV1)total_delay_ns")
+	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
 }
 
-record(ai, "$(SYS)$(DEV)tube_pos_delay"){ 
+record(ai, "$(SYS)$(DEV)Tube-Pos-Delay"){ 
 	field(VAL,  "0.0")
 	field(EGU,  "us")
-	field(FLNK, "$(SYS)$(DEV1)total_delay_ns")
+	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
 }
 
-record(ai, "$(SYS)$(DEV)mech_offset_delay") {
+record(ai, "$(SYS)$(DEV)Mech-Offset-Delay") {
 	field(VAL,  "0.0")
 	field(EGU,  "deg")
-	field(FLNK, "$(SYS)$(DEV1)total_delay_ns")
+	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
 }
 
-record(calc, "$(SYS)$(DEV)total_delay_ns") {
+record(calc, "$(SYS)$(DEV)Total-Delay-ns") {
 	field(SCAN, "Passive")
 	field(VAL,  "0")
 	field(EGU,  "us")
-	field(INPA, "$(SYS)$(DEV)freq_sp")
-	field(INPB, "$(SYS)$(DEV)mech_offset_delay")
-	field(INPC, "$(SYS)$(DEV)tube_pos_delay")
-	field(CALC, "B/360.0*1/A*1000000000+C*1000")
+	field(INPA, "$(SYS)$(DEV)Freq-SP")
+	field(INPB, "$(SYS)$(DEV)Mech-Offset-Delay")
+	field(INPC, "$(SYS)$(DEV)Tube-Pos-Delay")
+	field(CALC, "B/360.0*1/A*1000000000+C")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
