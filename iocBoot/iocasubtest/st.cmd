@@ -26,8 +26,8 @@ cd "${TOP}/iocBoot/${IOC}"
 iocInit
 dbpf LabS-Utgard-VIP:Chop1:Freq-SP 28
 dbpf LabS-Utgard-VIP:Chop2:Freq-SP 28
-dbpf LabS-Utgard-VIP:Chop1:Tube-Pos-Delay 2000
-dbpf LabS-Utgard-VIP:Chop2:Tube-Pos-Delay 1000
+dbpf LabS-Utgard-VIP:Chop1:Tube-Pos-Delay 10
+dbpf LabS-Utgard-VIP:Chop2:Tube-Pos-Delay 20
 dbpf LabS-Utgard-VIP:TS-EVR-1:RF-Freq 88051936
 
 # Select trigger source for soft seq 0, trigger source 0, 1 means pulser 1
