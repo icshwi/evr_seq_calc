@@ -23,6 +23,6 @@ record(calc, "$(SYS)$(DEV)Total-Delay-ns") {
 	field(INPA, "$(SYS)$(DEV)Freq-SP")
 	field(INPB, "$(SYS)$(DEV)Mech-Offset-Delay")
 	field(INPC, "$(SYS)$(DEV)Tube-Pos-Delay")
-	field(CALC, "A=0?C:B/360.0*1/A*1000000000+C")
+	field(CALC, "A=0?C:B/360.0*1/A*1E9+C")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
