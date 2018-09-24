@@ -158,10 +158,11 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	resolve_conflicts(in_RF_freq, in_sys_freq, sequence_freq,  total_events, tick_list, event_list);
 
 	//Add one more event to allow for sequence end event
-	float out_events[total_events+1], out_ticks[total_events+1];
+	float  out_events[total_events+1];
+	double out_ticks[total_events+1];
 
 	for (i = 0; i < total_events; i = i + 1) {
-		out_ticks[i] = (float) tick_list[i];
+		out_ticks[i] = (double) tick_list[i];
 		out_events[i] = (float) event_list[i];
 	}
 
@@ -177,7 +178,8 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	//Output tick list
 	precord->nevb = arr_len;
 	memcpy(precord->valb, out_ticks, arr_len * sizeof(out_ticks[0]));
-
+	//$(SYS)$(EVR)SoftSeq0-Timestamp-SP PP
+	
 	//Output commit value0
 	*(int *)precord->valc = 1;
 
