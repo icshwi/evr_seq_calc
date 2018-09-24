@@ -14,7 +14,7 @@ record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
 	field(INPK, "$(SYS)$(EVR)Base-Freq")
 	field(OUTA, "$(SYS)$(EVR)SoftSeq0-EvtCode-SP PP")
 	field(OUTB, "$(SYS)$(EVR)SoftSeq0-Timestamp-SP PP")
-	field(OUTC, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd")
+	field(OUTC, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd PP")
 	field(NOVA, "1000")
 	field(NOVB, "1000")
 	field(FTA,  "FLOAT")
@@ -30,8 +30,8 @@ record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
 	field(FTK,  "FLOAT")
 	field(FTVA, "FLOAT")
 	field(FTVB, "FLOAT")
-	field(FTVC, "FLOAT")
-	field(FLNK, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd")
+	field(FTVC, "LONG")
+	field(FLNK, "")
 	
 }
 record(ai, "$(SYS)$(EVR)Base-Event-Number") {
