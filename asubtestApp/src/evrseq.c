@@ -102,10 +102,10 @@ void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int a
 }
 static int evr_sequence_modifier(aSubRecord *precord) {
 	
-	float in_freqs[4], in_delays_ns[4], in_base_event_no, in_RF_freq, in_sys_freq, sequence_freq, lower_seq_freq, end_event_number;
+	float in_freqs[4], in_delays_ns[4], in_base_event_no, in_RF_freq, in_sys_freq, sequence_freq, lower_seq_freq, end_event_number, end_event_proc_time;
 	int delays_ticks[4], full_tick_list[512], full_event_list[512];
-	int i, arr_len, total_events, end_event_proc_time;
-	end_event_proc_time = 5;
+	int i, arr_len, total_events;
+	end_event_proc_time = 5.0;
 	lower_seq_freq = 12.0;
 	end_event_number = 127.0;
 //	base_ticks = 6289424;
@@ -162,14 +162,16 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	double out_ticks[total_events+1];
 
 	for (i = 0; i < total_events; i = i + 1) {
-		out_ticks[i] = (double) tick_list[i];
 		out_events[i] = (float) event_list[i];
+		out_ticks[i] = (double) tick_list[i];
+		
 	}
 
 	//Add sequence end event, a few ticks before the end to allow the event to be processed
 	arr_len = sizeof(out_ticks)/sizeof(out_ticks[0]);
-	out_ticks[arr_len-1] = in_RF_freq / sequence_freq - end_event_proc_time;
-	out_events[arr_len-1] = end_event_number;
+
+	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - end_event_proc_time;
+	out_events[total_events] = end_event_number;
 
 	//Output event list
 	precord->neva = arr_len;	
@@ -182,8 +184,16 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	
 	//Output commit value0
 	*(int *)precord->valc = 1;
-
-
+/*
+	float massC[3];
+	unsigned long elements;
+	massC[0] = 1.1;
+	massC[1] = 1.2;
+	massC[2] = 1.3;
+	elements = 3;
+	precord->nevb = elements;
+	memcpy(precord->valb, massC,elements * sizeof(float));
+*/
 return 0;
 }
 
