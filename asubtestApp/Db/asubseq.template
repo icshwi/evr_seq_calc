@@ -34,17 +34,6 @@ record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
 	field(FLNK, "")	
 }
 
-record(waveform, "$(SYS)$(EVR)Event-Sequence"){
-	field(SCAN, "Passive")
-	field(NELM, "2047")
-}	
-
-record(waveform, "$(SYS)$(EVR)Timing-Sequence"){
-	field(SCAN, "Passive")
-	field(NELM, "2047")
-	
-}
-
 record(ai, "$(SYS)$(EVR)Base-Event-Number") {
 	field(VAL, "17")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")

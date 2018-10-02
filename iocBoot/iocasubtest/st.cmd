@@ -11,7 +11,9 @@ epicsEnvSet("DEV1","Chop1:")
 epicsEnvSet("DEV2","Chop2:")
 epicsEnvSet("DEV3","Chop3:")
 epicsEnvSet("DEV4","Chop4:")
-
+epicsEnvSet("CHICSYS", "LabS-Utgard-VIP")
+epicsEnvSet("CHICID", "Chop-CHIC-01")
+epicsEnvSet("DEVICE", "$(EVR)")
 
 cd "${TOP}"
 
@@ -21,6 +23,10 @@ asubtest_registerRecordDeviceDriver pdbbase
 
 ## Load record instances
 dbLoadRecords("db/modifyevrseq.db","SYS=$(SYS), EVR=$(EVR), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")
+
+## Load substitution file
+#dbLoadTemplate("db/esschicTimestampBuffer.substitutions")
+#dbLoadTemplate("db/modifyevrseq.substitutions")
 
 cd "${TOP}/iocBoot/${IOC}"
 iocInit
