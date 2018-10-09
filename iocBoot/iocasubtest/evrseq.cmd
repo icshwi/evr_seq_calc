@@ -9,11 +9,15 @@ epicsEnvSet("CHICID_EVRSEQ", "Chop-CHIC-01")
 epicsEnvSet("DEVICE_EVR_SEQ", "$(EVR)")
 
 ## Load record instances
-dbLoadRecords("modifyevrseq.db","SYS=$(SYS_EVRSEQ), EVR=$(EVR_EVRSEQ), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")
+dbLoadRecords("modifyevrseq.db","SYS_EVRSEQ=$(SYS_EVRSEQ), EVR_EVRSEQ=$(EVR_EVRSEQ), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")
 
-## Load substitution file
-#dbLoadTemplate("db/esschicTimestampBuffer.substitutions")
-#dbLoadTemplate("db/modifyevrseq.substitutions")
+# Alternative method of loading records, using unbuilt substitutions file
+#
+# Change into the development directory so that the substitution and
+# template files can be found
+#cd $(EVRSEQ_DB_TOP)
+#dbLoadTemplate("modifyevrseq.substitutions","SYS_EVRSEQ=$(SYS_EVRSEQ), EVR_EVRSEQ=$(EVR_EVRSEQ), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")
+#cd $(E3_IOCSH_TOP)
 
 afterInit dbpf, LabS-Utgard-VIP:Chop1:Freq-SP, 28
 afterInit dbpf, LabS-Utgard-VIP:Chop2:Freq-SP, 28

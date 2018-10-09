@@ -1,14 +1,14 @@
 file evrcalcdelay.template
 {
-pattern {SYS, DEV}
-	{$(SYS), $(DEV1)}
-	{$(SYS), $(DEV2)}
-	{$(SYS), $(DEV3)}
-	{$(SYS), $(DEV4)}
+pattern {SYS, DEV, EVR}
+	{$(SYS_EVRSEQ), $(DEV1), $(EVR_EVRSEQ)}
+	{$(SYS_EVRSEQ), $(DEV2), $(EVR_EVRSEQ)}
+	{$(SYS_EVRSEQ), $(DEV3), $(EVR_EVRSEQ)}
+	{$(SYS_EVRSEQ), $(DEV4), $(EVR_EVRSEQ)}
 }
 
 file asubseq.template
 {
 pattern {SYS, EVR}
-	{$(SYS), $(EVR)}
+	{$(SYS_EVRSEQ), $(EVR_EVRSEQ)}
 }
