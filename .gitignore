@@ -6,3 +6,10 @@ O.*/
 envPaths
 *.swp
 .nfs*
+evrseq.Makefile
+*.db.d
+.cvsignore
+asubtestApp/Db/asubseq.db
+asubtestApp/Db/esschicTimestampBuffer.db
+asubtestApp/Db/evrcalcdelay.db
+asubtestApp/Db/modifyevrseq.db
