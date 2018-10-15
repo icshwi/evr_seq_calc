@@ -1,6 +1,6 @@
-#!../../bin/centos7-x86_64/asubtest
+#!../../bin/centos7-x86_64/evrseqcalc
 
-## You may have to change asubtest to something else
+## You may have to change evrseqcalc to something else
 ## everywhere it appears in this file
 
 < envPaths
@@ -18,8 +18,8 @@ epicsEnvSet("DEVICE", "$(EVR)")
 cd "${TOP}"
 
 ## Register all support components
-dbLoadDatabase "dbd/asubtest.dbd"
-asubtest_registerRecordDeviceDriver pdbbase
+dbLoadDatabase "dbd/evrseqcalc.dbd"
+evrseqcalc_registerRecordDeviceDriver pdbbase
 
 ## Load record instances
 dbLoadRecords("db/modifyevrseq.db","SYS=$(SYS), EVR=$(EVR), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")

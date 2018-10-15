@@ -8,30 +8,30 @@ include $(TOP)/configure/CONFIG
 #=============================
 # Build the IOC application
 
-PROD_IOC = asubtest
-# asubtest.dbd will be created and installed
-DBD += asubtest.dbd
+PROD_IOC = evrseqcalc
+# evrseqcalc.dbd will be created and installed
+DBD += evrseqcalc.dbd
 
-# asubtest.dbd will be made up from these files:
-asubtest_DBD += base.dbd
+# evrseqcalc.dbd will be made up from these files:
+evrseqcalc_DBD += base.dbd
 # Include dbd files from all support applications:
-asubtest_DBD += evrseq.dbd
+evrseqcalc_DBD += evrseq.dbd
 
 # Add all the support libraries needed by this IOC
-#asubtest_LIBS += xxx
+#evrseqcalc_LIBS += xxx
 
-# asubtest_registerRecordDeviceDriver.cpp derives from asubtest.dbd
-asubtest_SRCS += asubtest_registerRecordDeviceDriver.cpp
-asubtest_SRCS += evrseq.c
+# evrseq_registerRecordDeviceDriver.cpp derives from evrseqcalc.dbd
+evrseqcalc_SRCS += evrseqcalc_registerRecordDeviceDriver.cpp
+evrseqcalc_SRCS += evrseq.c
 # Build the main IOC entry point on workstation OSs.
-asubtest_SRCS_DEFAULT += asubtestMain.cpp
-asubtest_SRCS_vxWorks += -nil-
+evrseqcalc_SRCS_DEFAULT += evrseqMain.cpp
+evrseqcalc_SRCS_vxWorks += -nil-
 
 # Add support from base/src/vxWorks if needed
-#asubtest_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
+#evrseqcalc_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 
 # Finally link to the EPICS Base libraries
-asubtest_LIBS += $(EPICS_BASE_IOC_LIBS)
+evrseqcalc_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================
 

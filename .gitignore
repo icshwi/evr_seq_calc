@@ -9,7 +9,7 @@ envPaths
 evrseq.Makefile
 *.db.d
 .cvsignore
-asubtestApp/Db/asubseq.db
-asubtestApp/Db/esschicTimestampBuffer.db
-asubtestApp/Db/evrcalcdelay.db
-asubtestApp/Db/modifyevrseq.db
+evrseqcalcApp/Db/evrseqcalc.db
+evrseqcalcApp/Db/esschicTimestampBuffer.db
+evrseqcalcApp/Db/evrcalcdelay.db
+evrseqcalcApp/Db/modifyevrseq.db
