@@ -6,7 +6,6 @@ O.*/
 envPaths
 *.swp
 .nfs*
-evrseq.Makefile
 *.db.d
 .cvsignore
 evrseqcalcApp/Db/evrseqcalc.db
