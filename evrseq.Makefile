@@ -43,7 +43,7 @@ include $(where_am_I)/../configure/DECOUPLE_FLAGS
 ## Exclude linux-ppc64e6500
 EXCLUDE_ARCHS = linux-ppc64e6500
 
-APP:=asubtestApp
+APP:=evrseqcalcApp
 APPDB:=$(APP)/Db
 APPSRC:=$(APP)/src
 
