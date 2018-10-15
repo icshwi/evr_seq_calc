@@ -7,7 +7,7 @@ pattern {SYS, DEV, EVR}
 	{$(SYS_EVRSEQ), $(DEV4), $(EVR_EVRSEQ)}
 }
 
-file asubseq.template
+file asubevrseq.template
 {
 pattern {SYS, EVR}
 	{$(SYS_EVRSEQ), $(EVR_EVRSEQ)}
