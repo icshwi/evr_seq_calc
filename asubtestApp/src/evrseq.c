@@ -160,11 +160,11 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	//Add one more event to allow for sequence end event
 	float  out_events[total_events+1];
 	double out_ticks[total_events+1];
-
+	printf(		"Event no       Tick number\n");
 	for (i = 0; i < total_events; i = i + 1) {
 		out_events[i] = (float) event_list[i];
 		out_ticks[i] = (double) tick_list[i];
-		
+		printf(	"    %d         %d\n", event_list[i], tick_list[i]);
 	}
 
 	//Add sequence end event, a few ticks before the end to allow the event to be processed
@@ -173,6 +173,7 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - end_event_proc_time;
 	out_events[total_events] = end_event_number;
 
+	
 	//Output event list
 	precord->neva = arr_len;	
 	memcpy(precord->vala, out_events, arr_len * sizeof(out_events[0]));
@@ -180,20 +181,10 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	//Output tick list
 	precord->nevb = arr_len;
 	memcpy(precord->valb, out_ticks, arr_len * sizeof(out_ticks[0]));
-	//$(SYS)$(EVR)SoftSeq0-Timestamp-SP PP
 	
 	//Output commit value0
 	*(int *)precord->valc = 1;
-/*
-	float massC[3];
-	unsigned long elements;
-	massC[0] = 1.1;
-	massC[1] = 1.2;
-	massC[2] = 1.3;
-	elements = 3;
-	precord->nevb = elements;
-	memcpy(precord->valb, massC,elements * sizeof(float));
-*/
+
 return 0;
 }
 
