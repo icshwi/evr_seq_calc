@@ -160,11 +160,9 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	//Add one more event to allow for sequence end event
 	float  out_events[total_events+1];
 	double out_ticks[total_events+1];
-	printf(		"Event no       Tick number\n");
 	for (i = 0; i < total_events; i = i + 1) {
 		out_events[i] = (float) event_list[i];
 		out_ticks[i] = (double) tick_list[i];
-		printf(	"    %d         %d\n", event_list[i], tick_list[i]);
 	}
 
 	//Add sequence end event, a few ticks before the end to allow the event to be processed
@@ -173,6 +171,11 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - end_event_proc_time;
 	out_events[total_events] = end_event_number;
 
+	printf(         "No |  Event no  |   Tick number\n___|____________|________________________\n");
+        for (i = 0; i < total_events; i = i + 1) {
+                printf( "%d  |     %d     |    %d\n", i, event_list[i], (int)tick_list[i]);
+        }
+	printf( 	"%d  |     %d    |    %d\n", i, (int)out_events[total_events], (int)out_ticks[total_events]); 
 	
 	//Output event list
 	precord->neva = arr_len;	
