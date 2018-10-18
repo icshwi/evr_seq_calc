@@ -1,12 +1,12 @@
-epicsEnvSet("SYS_EVRSEQ","LabS-Utgard-VIP:")
-epicsEnvSet("EVR_EVRSEQ","TS-EVR-1:")
-epicsEnvSet("DEV1","Chop-Drv-0101:")
-epicsEnvSet("DEV2","Chop-Drv-0102:")
-epicsEnvSet("DEV3","Chop-Drv-0103:")
-epicsEnvSet("DEV4","Chop-Drv-0104:")
-epicsEnvSet("CHICSYS_EVRSEQ", "LabS-Utgard-VIP")
-epicsEnvSet("CHICID_EVRSEQ", "Chop-CHIC-01")
-epicsEnvSet("DEVICE_EVR_SEQ", "$(EVR)")
+#epicsEnvSet("SYS_EVRSEQ","LabS-Utgard-VIP:")
+#epicsEnvSet("EVR_EVRSEQ","TS-EVR-2:")
+#epicsEnvSet("DEV1","Chop-Drv-0201:")
+#epicsEnvSet("DEV2","Chop-Drv-0202:")
+#epicsEnvSet("DEV3","Chop-Drv-0203:")
+#epicsEnvSet("DEV4","Chop-Drv-0204:")
+#epicsEnvSet("CHICSYS_EVRSEQ", "LabS-Utgard-VIP")
+#epicsEnvSet("CHICID_EVRSEQ", "Chop-CHIC-02")
+#epicsEnvSet("DEVICE_EVR_SEQ", "$(EVR)")
 
 ## Load record instances
 dbLoadRecords("modifyevrseq.db","SYS_EVRSEQ=$(SYS_EVRSEQ), EVR_EVRSEQ=$(EVR_EVRSEQ), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")
@@ -19,11 +19,11 @@ dbLoadRecords("modifyevrseq.db","SYS_EVRSEQ=$(SYS_EVRSEQ), EVR_EVRSEQ=$(EVR_EVRS
 #dbLoadTemplate("modifyevrseq.substitutions","SYS_EVRSEQ=$(SYS_EVRSEQ), EVR_EVRSEQ=$(EVR_EVRSEQ), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")
 #cd $(E3_IOCSH_TOP)
 
-afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0101:Freq-SP, 28
-afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0102:Freq-SP, 28
-afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0103:Tube-Pos-Delay, 10
-afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0104:Tube-Pos-Delay, 20
-afterInit dbpf, LabS-Utgard-VIP:TS-EVR-1:RF-Freq, 88052500
+#afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0201:Freq-SP, 28
+#afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0202:Freq-SP, 28
+#afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0203:Tube-Pos-Delay, 10
+#afterInit dbpf, LabS-Utgard-VIP:Chop-Drv-0204:Tube-Pos-Delay, 20
+#afterInit dbpf, LabS-Utgard-VIP:TS-EVR-2:RF-Freq, 88052500
 
 # Select trigger source for soft seq 0, trigger source 0, 1 means pulser 1
 #dbpf LabS-Utgard-VIP:TS-EVR-1:SoftSeq0-TrigSrc-0-Sel 2
