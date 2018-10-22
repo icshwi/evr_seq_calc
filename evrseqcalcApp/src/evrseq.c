@@ -171,9 +171,14 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - end_event_proc_time;
 	out_events[total_events] = end_event_number;
 
-	printf(         "No |  Event no  |   Tick number\n___|____________|________________________\n");
+	printf(         "\nNo |  Event no  |   Tick number\n___|____________|________________________\n");
         for (i = 0; i < total_events; i = i + 1) {
-                printf( "%d  |     %d     |    %d\n", i, event_list[i], (int)tick_list[i]);
+		if (i < 10) {
+	                printf( "%d  |     %d     |    %d\n", i, event_list[i], (int)tick_list[i]);
+		}else{
+	                printf( "%d |     %d     |    %d\n", i, event_list[i], (int)tick_list[i]);
+		}
+
         }
 	printf( 	"%d  |     %d    |    %d\n", i, (int)out_events[total_events], (int)out_ticks[total_events]); 
 	
