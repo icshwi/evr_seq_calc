@@ -40,8 +40,9 @@ record(ai, "$(SYS)$(EVR)Base-Event-Number") {
 }
 
 record(ai, "$(SYS)$(EVR)RF-Freq") {
-	field(VAL, "88052500")
-	field(EGU, "Hz")
+	field(INP, "$(SYS)$(EVR)Link-Clk-SP CPP")
+	field(VAL, "88.0525")
+	field(EGU, "MHz")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
 record(ai, "$(SYS)$(EVR)Base-Freq") {

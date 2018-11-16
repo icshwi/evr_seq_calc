@@ -92,12 +92,13 @@ void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int a
 			if (tick_list[i] > (seq_len - 3)) {
 				tick_list[i] = 0;
 			}
+			sort_sequence(arr_len, tick_list, event_list);
 			i = 0;
 		}
 		i = i + 1;
 	}
 //	printf("Sorting output:\n");
-	sort_sequence(arr_len, tick_list, event_list);
+//	sort_sequence(arr_len, tick_list, event_list);
 	return ;
 }
 static int evr_sequence_modifier(aSubRecord *precord) {
@@ -108,8 +109,6 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	end_event_proc_time = 5.0;
 	lower_seq_freq = 12.0;
 	end_event_number = 127.0;
-//	base_ticks = 6289424;
-//	printf("Start\n");
 
 	in_freqs[0] 		= *(float *)precord->a;
 	in_freqs[1] 		= *(float *)precord->b;
@@ -120,7 +119,7 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	in_delays_ns[2] 	= *(float *)precord->g;
 	in_delays_ns[3] 	= *(float *)precord->h;
 	in_base_event_no 	= *(float *)precord->i;
-	in_RF_freq 		= *(float *)precord->j;
+	in_RF_freq 		= *(float *)precord->j * 1000000;
 	in_sys_freq 		= *(float *)precord->k;
 	
 

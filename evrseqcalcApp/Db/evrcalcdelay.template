@@ -1,12 +1,13 @@
 record(ai, "$(SYS)$(DEV)Freq-SP") {
+	field(INP,  "$(NCG_SYS)$(NCG_DRV)Spd_SP CPP")
 	field(VAL,  "0")
 	field(EGU,  "Hz")
 	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
 }
 
-record(ai, "$(SYS)$(DEV)Tube-Pos-Delay"){ 
+record(ai, "$(SYS)$(DEV)Beam-Pos-Delay"){ 
 	field(VAL,  "0.0")
-	field(EGU,  "us")
+	field(EGU,  "ns")
 	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
 }
 
@@ -16,13 +17,20 @@ record(ai, "$(SYS)$(DEV)Mech-Offset-Delay") {
 	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
 }
 
+record(ai, "$(SYS)$(DEV)Chopper-Delay-SP") {
+	field(VAL,  "0.0")
+	field(EGU,  "ns")
+	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
+}
+
 record(calc, "$(SYS)$(DEV)Total-Delay-ns") {
 	field(SCAN, "Passive")
 	field(VAL,  "0")
-	field(EGU,  "us")
+	field(EGU,  "ns")
 	field(INPA, "$(SYS)$(DEV)Freq-SP")
 	field(INPB, "$(SYS)$(DEV)Mech-Offset-Delay")
-	field(INPC, "$(SYS)$(DEV)Tube-Pos-Delay")
-	field(CALC, "A=0?C:B/360.0*1/A*1E9+C")
+	field(INPC, "$(SYS)$(DEV)Beam-Pos-Delay")
+	field(INPD, "$(SYS)$(DEV)Chopper-Delay-SP")
+	field(CALC, "A=0?C+D:B/360.0*1/A*1E9+C+D")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
