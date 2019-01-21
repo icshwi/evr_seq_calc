@@ -34,7 +34,7 @@ int create_tick_event_list(float *freqs, int arr_len, float base_event_no, float
 
 }
 
-void apply_delay(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *delay_list, int *tick_list, int *event_list float end_event_ticks) {
+void apply_delay(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *delay_list, int *tick_list, int *event_list, float end_event_ticks) {
 	int i, delay_index;
 	float seq_len;
 	seq_len = round(RF_freq / sequence_freq);
