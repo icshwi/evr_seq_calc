@@ -12,6 +12,7 @@ record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
 	field(INPI, "$(SYS)$(EVR)Base-Event-Number")
 	field(INPJ, "$(SYS)$(EVR)RF-Freq")
 	field(INPK, "$(SYS)$(EVR)Base-Freq")
+	field(INPL, "$(SYS)$(EVR)End-Event-Ticks")
 	field(OUTA, "$(SYS)$(EVR)SoftSeq0-EvtCode-SP PP")
 	field(OUTB, "$(SYS)$(EVR)SoftSeq0-Timestamp-SP PP")
 	field(OUTC, "$(SYS)$(EVR)SoftSeq0-Commit-Cmd PP")
@@ -48,5 +49,9 @@ record(ai, "$(SYS)$(EVR)RF-Freq") {
 record(ai, "$(SYS)$(EVR)Base-Freq") {
 	field(VAL, "14")
 	field(EGU, "Hz")
+	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
+}
+record(ai, "$(SYS)$(EVR)End-Event-Ticks") {
+	field(VAL, "5")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
