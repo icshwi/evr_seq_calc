@@ -2,15 +2,14 @@
 #include <registryFunction.h>
 #include <epicsExport.h>
 #include <string.h> // Provides memcpy prototype
-#include <stdlib.h> // Provides calloc prototyp
+#include <stdlib.h> // Provides calloc prototype
 #include <stdio.h>
 #include <math.h>
 //#include <create_tick_event_list.h>
 
 int create_tick_event_list(float *freqs, int arr_len, float base_event_no, float RF_freq, float sys_freq, float sequence_freq, int *tick_list, int *event_list) {
-        int i, j, k, total_events, num_of_events;
+  int i, j, k, total_events, num_of_events;
 	float ticks_per_event, ticks_per_cycle;
-	
 	ticks_per_cycle = round(RF_freq/sys_freq);
 //	printf("%f", ticks_per_cycle);
 	k = 0;
@@ -29,12 +28,12 @@ int create_tick_event_list(float *freqs, int arr_len, float base_event_no, float
 			}
 		}
         }
-	total_events = k;
-        return total_events;
+  total_events = k;
+  return total_events;
 
 }
 
-void apply_delay(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *delay_list, int *tick_list, int *event_list, float end_event_ticks) {
+void apply_delay(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *delay_list, int *tick_list, int *event_list, float in_end_event_ticks) {
 	int i, delay_index;
 	float seq_len;
 	seq_len = round(RF_freq / sequence_freq);
@@ -48,13 +47,13 @@ void apply_delay(float RF_freq, float sys_freq, float sequence_freq, int arr_len
 			tick_list[i] = tick_list[i]+delay_list[delay_index];
 			delay_index = delay_index + 1;
 		}
-		if (tick_list[i] > (int) (seq_len - end_event_ticks) && tick_list[i] <= (int)seq_len) {
+		if (tick_list[i] > (int) (seq_len - in_end_event_ticks) && tick_list[i] <= (int)seq_len) {
 			tick_list[i] = 0;
 		}
 		else if (tick_list[i] > seq_len) {
 			tick_list[i] = tick_list[i] % (int) seq_len;
 		}
-//		printf("tick_list: %d max_ticks%d\n", tick_list[i], (int) (RF_freq/sequence_freq - end_event_ticks) );
+//		printf("tick_list: %d max_ticks%d\n", tick_list[i], (int) (RF_freq/sequence_freq - in_end_event_ticks) );
 	}	
 	return ;
 }
@@ -79,7 +78,7 @@ void sort_sequence(int arr_len, int *tick_list, int *event_list) {
 	}
 }
 
-void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *tick_list, int *event_list, float end_event_ticks) {
+void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *tick_list, int *event_list, float in_end_event_ticks) {
 	int i;
 	float seq_len;
 	seq_len =round(RF_freq / sequence_freq);
@@ -89,7 +88,7 @@ void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int a
 		if (tick_list[i-1] == tick_list[i]) {
 	//		printf("ticks = %d  i = %d\n", tick_list[i], i);
 			tick_list[i] = tick_list[i] + 1;
-			if (tick_list[i] > (int) (seq_len - end_event_ticks)) {
+			if (tick_list[i] > (int) (seq_len - in_end_event_ticks)) {
 				tick_list[i] = 0;
 			}
 			sort_sequence(arr_len, tick_list, event_list);
@@ -103,8 +102,8 @@ void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int a
 }
 static int evr_sequence_modifier(aSubRecord *precord) {
 	
-	float in_freqs[4], in_delays_ns[4], in_base_event_no, in_RF_freq, in_sys_freq, sequence_freq, lower_seq_freq, end_event_number, in_end_event_ticks, end_event_ticks;
-	int delays_ticks[4], full_tick_list[512], full_event_list[512];
+	float in_freqs[4], in_delays_ns[4], in_base_event_no, in_RF_freq, in_sys_freq, sequence_freq, lower_seq_freq, end_event_number, in_end_event_ticks;
+	int delays_ticks[4], full_tick_list[2048], full_event_list[2048];
 	int i, arr_len, total_events;
 	lower_seq_freq = 12.0;
 	end_event_number = 127.0;
@@ -122,9 +121,6 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	in_sys_freq 		= *(float *)precord->k;
 	in_end_event_ticks	= *(float *)precord->l;
 	
-
-	end_event_ticks = in_end_event_ticks;
-
 	for (i = 0; i < sizeof(in_freqs)/sizeof(in_freqs[0]); i = i +1) {
 		delays_ticks[i] = (int) round(in_delays_ns[i] / 1000000000.0 * in_RF_freq);
 	}	
@@ -141,7 +137,7 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	//Create two arrays, one with all events and one with the corresponding tick timing
 	total_events = create_tick_event_list(in_freqs, arr_len, in_base_event_no, in_RF_freq, in_sys_freq, sequence_freq, full_tick_list, full_event_list);
 
-	//Reduce the full lists number of events needed and copy values
+	//Reduce the array sizes and copy values
 	int tick_list[total_events], event_list[total_events];
 	//arr_len = sizeof(tick_list) / sizeof(tick_list[0]);
 	for(i = 0; i < total_events; i = i + 1){
@@ -150,13 +146,13 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	}
 //	printf("total_events: %d, arr_len: %d\n", total_events, arr_len);
 	//Apply delay for each event in the tick array
-	apply_delay(in_RF_freq, in_sys_freq, sequence_freq, total_events, delays_ticks, tick_list, event_list, end_event_ticks);
+	apply_delay(in_RF_freq, in_sys_freq, sequence_freq, total_events, delays_ticks, tick_list, event_list, in_end_event_ticks);
 
 	//Sort the list after tick size
 	sort_sequence(total_events, tick_list, event_list);
 
 	//Ensure no events happen on the same tick count
-	resolve_conflicts(in_RF_freq, in_sys_freq, sequence_freq,  total_events, tick_list, event_list, end_event_ticks);
+	resolve_conflicts(in_RF_freq, in_sys_freq, sequence_freq,  total_events, tick_list, event_list, in_end_event_ticks);
 
 	//Add one more event to allow for sequence end event
 	float  out_events[total_events+1];
@@ -169,7 +165,7 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 	//Add sequence end event, a few ticks before the end to allow the event to be processed
 	arr_len = sizeof(out_ticks)/sizeof(out_ticks[0]);
 
-	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - end_event_ticks;
+	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - in_end_event_ticks;
 	out_events[total_events] = end_event_number;
 
 	printf(         "\nNo |  Event no  |   Tick number\n___|____________|________________________\n");
