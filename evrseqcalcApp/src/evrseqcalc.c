@@ -100,7 +100,7 @@ void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int a
 //	sort_sequence(arr_len, tick_list, event_list);
 	return ;
 }
-static int evr_sequence_modifier(aSubRecord *precord) {
+static int evr_sequence_calc(aSubRecord *precord) {
 	
 	float in_freqs[4], in_delays_ns[4], in_base_event_no, in_RF_freq, in_sys_freq, sequence_freq, lower_seq_freq, end_event_number, in_end_event_ticks;
 	int delays_ticks[4], full_tick_list[2048], full_event_list[2048];
@@ -193,5 +193,5 @@ static int evr_sequence_modifier(aSubRecord *precord) {
 return 0;
 }
 
-epicsRegisterFunction(evr_sequence_modifier);
+epicsRegisterFunction(evr_sequence_calc);
 
