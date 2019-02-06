@@ -1,8 +1,0 @@
-file /opt/epics/modules/esschic/2.2.0/db/esschicTimestampBuffer.template
-{
-pattern {PREFIX		, DRIVEID	, TDC_TIME_LINK			, BEAMPULSE_TIME_LINK		, TSARR_N}
-	{$(CHICSYS)	, $(CHICID)	, $(SYS)$(DEVICE)EvtACnt-I	, $(SYS)$(DEVICE)EvtECnt-I	, 50}
-	{$(CHICSYS)	, $(CHICID)	, $(SYS)$(DEVICE)EvtBCnt-I	, $(SYS)$(DEVICE)EvtECnt-I	, 50}
-	{$(CHICSYS)	, $(CHICID)	, $(SYS)$(DEVICE)EvtCCnt-I	, $(SYS)$(DEVICE)EvtECnt-I	, 50}
-	{$(CHICSYS)	, $(CHICID)	, $(SYS)$(DEVICE)EvtDCnt-I	, $(SYS)$(DEVICE)EvtECnt-I	, 50}
-}

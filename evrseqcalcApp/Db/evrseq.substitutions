@@ -1,4 +1,4 @@
-file evrcalcdelay.template
+file evrseqdelay.template
 {
 pattern {SYS, DEV, EVR}
 	{$(SYS_EVRSEQ), $(DEV1), $(EVR_EVRSEQ)}
@@ -7,7 +7,7 @@ pattern {SYS, DEV, EVR}
 	{$(SYS_EVRSEQ), $(DEV4), $(EVR_EVRSEQ)}
 }
 
-file asubevrseq.template
+file evrseqcalc.template
 {
 pattern {SYS, EVR}
 	{$(SYS_EVRSEQ), $(EVR_EVRSEQ)}
