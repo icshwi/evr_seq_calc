@@ -47,7 +47,7 @@ void apply_delay(float RF_freq, float sys_freq, float sequence_freq, int arr_len
 			tick_list[i] = tick_list[i]+delay_list[delay_index];
 			delay_index = delay_index + 1;
 		}
-		if (tick_list[i] > (int) (seq_len - in_end_event_ticks) && tick_list[i] <= (int)seq_len) {
+		if (tick_list[i] >= (int) (seq_len - in_end_event_ticks) && tick_list[i] <= (int)seq_len) {
 			tick_list[i] = 0;
 		}
 		else if (tick_list[i] > seq_len) {
@@ -82,22 +82,22 @@ void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int a
 	int i;
 	float seq_len;
 	seq_len =round(RF_freq / sequence_freq);
-	i = 1;
+	i = arr_len;
 	//printf("arr_len = %d\n", arr_len);
-	while (i < arr_len) {
+	//Search backwards to have the events being arranged in an event number increasing order
+	while (i > 0) {
 		if (tick_list[i-1] == tick_list[i]) {
-	//		printf("ticks = %d  i = %d\n", tick_list[i], i);
+//			printf("event[i-1] = %d ticks[i-1] = %d event[i] = %d ticks[i] = %d i = %d\n", event_list[i-1], tick_list[i-1], event_list[i],  tick_list[i], i);
 			tick_list[i] = tick_list[i] + 1;
 			if (tick_list[i] > (int) (seq_len - in_end_event_ticks)) {
 				tick_list[i] = 0;
 			}
 			sort_sequence(arr_len, tick_list, event_list);
-			i = 0;
+			i = arr_len ;
 		}
-		i = i + 1;
+		i = i - 1;
 	}
 //	printf("Sorting output:\n");
-//	sort_sequence(arr_len, tick_list, event_list);
 	return ;
 }
 static int evr_sequence_calc(aSubRecord *precord) {
@@ -168,16 +168,18 @@ static int evr_sequence_calc(aSubRecord *precord) {
 	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - in_end_event_ticks;
 	out_events[total_events] = end_event_number;
 
-	printf(         "\nNo |  Event no  |   Tick number\n___|____________|________________________\n");
-        for (i = 0; i < total_events; i = i + 1) {
-		if (i < 10) {
-	                printf( "%d  |     %d     |    %d\n", i, event_list[i], (int)tick_list[i]);
-		}else{
-	                printf( "%d |     %d     |    %d\n", i, event_list[i], (int)tick_list[i]);
-		}
-
+	int digits_no = 0;
+	int digits_event = 0;
+	printf("\nNo    |  Event no  |   Tick number\n______|____________|________________________\n");
+        for (i = 0; i <= total_events; i = i + 1) {
+		digits_no = 2 - floor(log10(abs(i+1))) + 1;
+		digits_event = 2 - floor(log10(abs(out_events[i]+1))) + 1;
+		printf( " %d", i + 1);
+		printf(" %*c", digits_no,' ');
+		printf("|");
+		printf("  %*c", digits_event,' ');
+		printf("%d      |     %d\n", (int) out_events[i], (int) out_ticks[i]);
         }
-	printf( 	"%d |     %d    |    %d\n", i, (int)out_events[total_events], (int)out_ticks[total_events]); 
 	
 	//Output event list
 	precord->neva = arr_len;	

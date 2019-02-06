@@ -14,3 +14,6 @@ evrseqcalcApp/Db/evrcalcdelay.db
 evrseqcalcApp/Db/modifyevrseq.db
 evrseq.Makefile
 evrseqcalcApp/Db/asubevrseq.db
+evrseqcalcApp/Db/evrseq.db
+evrseqcalcApp/Db/evrseqdelay.db
+
