@@ -155,11 +155,11 @@ static int evr_sequence_calc(aSubRecord *precord) {
 	resolve_conflicts(in_RF_freq, in_sys_freq, sequence_freq,  total_events, tick_list, event_list, in_end_event_ticks);
 
 	//Add one more event to allow for sequence end event
-	float  out_events[total_events+1];
-	double out_ticks[total_events+1];
+	float out_events[total_events+1];
+	float out_ticks[total_events+1];
 	for (i = 0; i < total_events; i = i + 1) {
 		out_events[i] = (float) event_list[i];
-		out_ticks[i] = (double) tick_list[i];
+		out_ticks[i] = (float) tick_list[i];
 	}
 
 	//Add sequence end event, a few ticks before the end to allow the event to be processed

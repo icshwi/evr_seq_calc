@@ -31,7 +31,7 @@ record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
 	field(FTK,  "FLOAT")
 	field(FTL,  "FLOAT")
 	field(FTVA, "FLOAT")
-	field(FTVB, "DOUBLE")
+	field(FTVB, "FLOAT")
 	field(FTVC, "LONG")
 	field(FLNK, "")	
 }
@@ -53,6 +53,6 @@ record(ai, "$(SYS)$(EVR)Base-Freq") {
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
 record(ai, "$(SYS)$(EVR)End-Event-Ticks") {
-	field(VAL, "5")
+	field(VAL, "0")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
