@@ -53,6 +53,6 @@ record(ai, "$(SYS)$(EVR)Base-Freq") {
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
 record(ai, "$(SYS)$(EVR)End-Event-Ticks") {
-	field(VAL, "0")
+	field(VAL, "2")
 	field(FLNK, "$(SYS)$(EVR)SoftSeq-Calc")
 }
