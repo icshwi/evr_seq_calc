@@ -29,6 +29,7 @@ int create_tick_event_list(float *freqs, int arr_len, float base_event_no, float
 		}
         }
   total_events = k;
+//printf("Total events: %d\n", total_events);
   return total_events;
 
 }
@@ -83,7 +84,7 @@ void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int a
 	float seq_len;
 	seq_len =round(RF_freq / sequence_freq);
 	i = arr_len;
-	//printf("arr_len = %d\n", arr_len);
+//	printf("arr_len = %d\n", arr_len);
 	//Search backwards to have the events being arranged in an event number increasing order
 	while (i > 0) {
 		if (tick_list[i-1] == tick_list[i]) {
@@ -119,7 +120,7 @@ static int evr_sequence_calc(aSubRecord *precord) {
 	in_base_event_no 	= *(float *)precord->i;
 	in_RF_freq 		= *(float *)precord->j * 1000000;
 	in_sys_freq 		= *(float *)precord->k;
-	in_end_event_ticks	= *(float *)precord->l;
+	in_end_event_ticks	= *(float *)precord->l + 1; //Add 1, arrays starts at 0
 	
 	for (i = 0; i < sizeof(in_freqs)/sizeof(in_freqs[0]); i = i +1) {
 		delays_ticks[i] = (int) round(in_delays_ns[i] / 1000000000.0 * in_RF_freq);
@@ -154,12 +155,16 @@ static int evr_sequence_calc(aSubRecord *precord) {
 	//Ensure no events happen on the same tick count
 	resolve_conflicts(in_RF_freq, in_sys_freq, sequence_freq,  total_events, tick_list, event_list, in_end_event_ticks);
 
+//	for (i = 0; i<total_events; i = i + 1) {
+//		printf("Ticknumber: %d\n", tick_list[i]);
+//	}
+
 	//Add one more event to allow for sequence end event
-	float out_events[total_events+1];
-	float out_ticks[total_events+1];
+	int out_events[total_events+1];
+	int  out_ticks[total_events+1];
 	for (i = 0; i < total_events; i = i + 1) {
-		out_events[i] = (float) event_list[i];
-		out_ticks[i] = (float) tick_list[i];
+		out_events[i] = (int) event_list[i];
+		out_ticks[i] = (int) tick_list[i];
 	}
 
 	//Add sequence end event, a few ticks before the end to allow the event to be processed

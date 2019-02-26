@@ -30,8 +30,8 @@ record(aSub, "$(SYS)$(EVR)SoftSeq-Calc") {
 	field(FTJ,  "FLOAT")
 	field(FTK,  "FLOAT")
 	field(FTL,  "FLOAT")
-	field(FTVA, "FLOAT")
-	field(FTVB, "FLOAT")
+	field(FTVA, "LONG")
+	field(FTVB, "LONG")
 	field(FTVC, "LONG")
 	field(FLNK, "")	
 }
