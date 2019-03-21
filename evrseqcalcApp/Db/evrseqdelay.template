@@ -1,5 +1,5 @@
 record(ai, "$(SYS)$(DEV)Freq-SP") {
-	field(INP,  "$(NCG_SYS)$(NCG_DRV)Spd_SP CPP")
+	field(INP,  "$(SYS)$(DEV)Spd_SP CPP")
 	field(VAL,  "0")
 	field(EGU,  "Hz")
 	field(FLNK, "$(SYS)$(DEV)Total-Delay-ns")
