@@ -10,7 +10,7 @@
 int create_tick_event_list(float *freqs, int arr_len, float base_event_no, float RF_freq, float sys_freq, float sequence_freq, int *tick_list, int *event_list) {
   int i, j, k, total_events, num_of_events;
 	float ticks_per_event, ticks_per_cycle;
-	ticks_per_cycle = round(RF_freq/sys_freq);
+	ticks_per_cycle = round(RF_freq / sys_freq* 1000000);
 //	printf("%f", ticks_per_cycle);
 	k = 0;
 
@@ -37,7 +37,7 @@ int create_tick_event_list(float *freqs, int arr_len, float base_event_no, float
 void apply_delay(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *delay_list, int *tick_list, int *event_list, float in_end_event_ticks) {
 	int i, delay_index;
 	float seq_len;
-	seq_len = round(RF_freq / sequence_freq);
+	seq_len = round(RF_freq / sequence_freq * 1000000);
 	delay_index = 0;
 	for (i = 0; i < arr_len; i = i + 1) {
 //		printf("Apply delay: %f, %d\n", seq_len, delay_list[i]);
@@ -82,7 +82,7 @@ void sort_sequence(int arr_len, int *tick_list, int *event_list) {
 void resolve_conflicts(float RF_freq, float sys_freq, float sequence_freq, int arr_len, int *tick_list, int *event_list, float in_end_event_ticks) {
 	int i;
 	float seq_len;
-	seq_len =round(RF_freq / sequence_freq);
+	seq_len =round(RF_freq / sequence_freq * 1000000);
 	i = arr_len;
 //	printf("arr_len = %d\n", arr_len);
 	//Search backwards to have the events being arranged in an event number increasing order
@@ -118,12 +118,13 @@ static int evr_sequence_calc(aSubRecord *precord) {
 	in_delays_ns[2] 	= *(float *)precord->g;
 	in_delays_ns[3] 	= *(float *)precord->h;
 	in_base_event_no 	= *(float *)precord->i;
-	in_RF_freq 		= *(float *)precord->j * 1000000;
+	in_RF_freq 		= *(float *)precord->j; //MHz
 	in_sys_freq 		= *(float *)precord->k;
 	in_end_event_ticks	= *(float *)precord->l + 1; //Add 1, arrays starts at 0
 	
 	for (i = 0; i < sizeof(in_freqs)/sizeof(in_freqs[0]); i = i +1) {
-		delays_ticks[i] = (int) round(in_delays_ns[i] / 1000000000.0 * in_RF_freq);
+		//Convert ns to us by dividing by 1000, then multiply with MHz
+		delays_ticks[i] = (int) round(in_delays_ns[i] / 1000.0 * in_RF_freq);
 	}	
        
 	arr_len = sizeof(in_freqs) / sizeof(in_freqs[0]);
@@ -170,7 +171,7 @@ static int evr_sequence_calc(aSubRecord *precord) {
 	//Add sequence end event, a few ticks before the end to allow the event to be processed
 	arr_len = sizeof(out_ticks)/sizeof(out_ticks[0]);
 
-	out_ticks[total_events] = round(in_RF_freq / sequence_freq) - in_end_event_ticks;
+	out_ticks[total_events] = round(in_RF_freq / sequence_freq * 1000000) - in_end_event_ticks;
 	out_events[total_events] = end_event_number;
 
 	int digits_no = 0;
