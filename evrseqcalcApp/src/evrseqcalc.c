@@ -176,15 +176,23 @@ static int evr_sequence_calc(aSubRecord *precord) {
 
 	int digits_no = 0;
 	int digits_event = 0;
-	printf("\nNo    |  Event no  |   Tick number\n______|____________|________________________\n");
+	printf("\nNo    |  Event no  |   Tick number   |  Time (ns)     | \n______|____________|_________________|_______________________\n");
         for (i = 0; i <= total_events; i = i + 1) {
 		digits_no = 2 - floor(log10(abs(i+1))) + 1;
 		digits_event = 2 - floor(log10(abs(out_events[i]+1))) + 1;
-		printf( " %d", i + 1);
-		printf(" %*c", digits_no,' ');
+        digits_ticks = 2 - floor(log10(abs(out_ticks[i]+1))) + 1;
+        digits_ns =  2 - floor(log10(abs((out_ticks[i] / in_RF_freq / 1000000)+1))) + 1;
+		printf("  %*c", digits_no,' ');
+		printf("%d  ", i + 1);
 		printf("|");
 		printf("  %*c", digits_event,' ');
-		printf("%d      |     %d\n", (int) out_events[i], (int) out_ticks[i]);
+		printf("%d      |     %d  |      %d\n", (int) out_events[i], (int) out_ticks[i]);
+        printf("|");
+        printf("  %*c", digits_ticks,' ');
+        printf("%d      ", (int) out_ticks[i]);      
+        printf("|");
+        printf("  %*c", digits_ns,' ');
+        printf("%d", (int) (out_ticks[i] / in_RF_freq / 1000000));
         }
 	
 	//Output event list
