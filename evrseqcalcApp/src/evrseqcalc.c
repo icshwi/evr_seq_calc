@@ -175,6 +175,8 @@ static int evr_sequence_calc(aSubRecord *precord) {
 
 	int digits_no = 0;
 	int digits_event = 0;
+    int digits_ticks = 0;
+    int digits_ns = 0;
 	printf("\nNo    |  Event no  |   Tick number   |  Time (ns)     | \n______|____________|_________________|_______________________\n");
         for (i = 0; i <= total_events; i = i + 1) {
 		digits_no = 2 - floor(log10(abs(i+1))) + 1;
