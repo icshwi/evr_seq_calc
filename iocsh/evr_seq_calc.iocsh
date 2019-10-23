@@ -1,0 +1,2 @@
+## Load record instances
+dbLoadRecords("evrseq.db","SYS_EVRSEQ=$(SYS_EVRSEQ), EVR_EVRSEQ=$(EVR_EVRSEQ), DEV1=$(DEV1), DEV2=$(DEV2), DEV3=$(DEV3), DEV4=$(DEV4)")
